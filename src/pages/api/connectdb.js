@@ -9,12 +9,12 @@ async function handler(req, res) {
   try {
     const { title, todo } = req.body;
 
-    await mongoose
-      .connect("mongodb+srv://test:123@cluster0.qedsa.mongodb.net/", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      })
-      .then(() => console.log(" DB connected"));
+    // await mongoose
+    //   .connect("mongodb+srv://test:123@cluster0.qedsa.mongodb.net/", {
+    //     useNewUrlParser: true,
+    //     useUnifiedTopology: true,
+    //   })
+    //   .then(() => console.log(" DB connected"));
 
     var newTodo = new schema({ title, todo });
     await newTodo.save();
@@ -23,7 +23,7 @@ async function handler(req, res) {
     console.log(error);
     res.status(500).json({ error: "Internal error" });
   } finally {
-    mongoose.connection.close();
+    // mongoose.connection.close();
   }
 }
 
