@@ -1,14 +1,19 @@
 import { useState } from "react";
 import Axios from "axios";
+import dbConnect from "../../lib/mogodb.connection";
+
 
 export async function getStaticProps() {
   const mongoose = require("mongoose");
   const schema = require("../../models/Schema");
 
-  await mongoose.connect("mongodb+srv://test:123@cluster0.qedsa.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  // defined this connection only 1 at your first initialize entries point
+  await dbConnect()
+
+  // await mongoose.connect("mongodb+srv://test:123@cluster0.qedsa.mongodb.net/", {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true,
+  // });
   const todos = await schema.find().sort({ createdAt: "desc" });
   console.log(todos);
   return {
